@@ -9,9 +9,9 @@ You will need Apache Tomcat 8 server, MySQL RDBMS, JDBC connector.
 
 3.Modify the web.xml file located in weblibrary/weblibrary-ver1/WebContent/WEB-INF/web.xml 
  
-DBURL here add your database url
-USERNAME MySQL user username that have all priveleges for the database
-PASSWORD password 
+<br />DBURL here add your database url
+<br />USERNAME MySQL user username that have all priveleges for the database
+<br />PASSWORD password 
 
 4.Connect your Tomcat 8 server to the web project
 
