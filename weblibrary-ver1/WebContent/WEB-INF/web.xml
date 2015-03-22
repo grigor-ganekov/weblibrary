@@ -11,14 +11,14 @@
   </welcome-file-list>
   <context-param>
     <param-name>dburl</param-name>
-    <param-value>jdbc:mysql://localhost:3306/library</param-value>
+    <param-value>DBURL</param-value>
   </context-param>
   <context-param>
     <param-name>user</param-name>
-    <param-value>root</param-value>
+    <param-value>USERNAME</param-value>
   </context-param>
   <context-param>
     <param-name>password</param-name>
-    <param-value>Qwepoi12</param-value>
+    <param-value>PASSWORD</param-value>
   </context-param>
 </web-app>
