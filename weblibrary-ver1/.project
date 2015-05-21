@@ -3,7 +3,6 @@
 	<name>weblibrary-ver1</name>
 	<comment></comment>
 	<projects>
-		<project>mysql-connector-java-5.1.34-bin</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

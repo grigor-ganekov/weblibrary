@@ -1,42 +1,43 @@
-<!DOCTYPE HTML>
-<!--
-	ZeroFour by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="weblibrary.dao.*"%>
+<%@ page import="weblibrary.dto.Book"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-	<head>
-        <link rel="shortcut icon" href="../favicon.ico">
-		    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-		    <link rel="stylesheet" type="text/css" href="css/demo.css" />
-		    <link rel="stylesheet" type="text/css" href="css/component.css" />
-		<title>Library</title>
+<head>
+<title>Library</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
 		<script src="js/jquery.min.js"></script>
 		<script src="js/jquery.dropotron.min.js"></script>
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
 		<noscript>
-		    <link rel="shortcut icon" href="../favicon.ico">
-		    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-		    <link rel="stylesheet" type="text/css" href="css/demo.css" />
-		    <link rel="stylesheet" type="text/css" href="css/component.css" />
-            <link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-desktop.css" />
-
 		</noscript>
 		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
 	</head>
-	<body class="left-sidebar">
+
+<body class="left-sidebar">
+		<% BookDAO dao = (BookDAO) getServletContext().getAttribute("dao"); %>
+		<%//this page book
+			Book theBook = null;
+			theBook = (Book) request.getAttribute("book");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("missing.html");
+			if(theBook == null){
+				dispatcher.forward(request, response);
+				}
+			
+			%>
 		<!-- Header Wrapper -->
 			<div id="header-wrapper">
 				<div class="container">
+						
 					<!-- Header -->
 						<header id="header">
 							<div class="inner">
@@ -49,7 +50,7 @@
 										<ul>
 											<li><a href="index.html">Начало</a></li>
 											<li><a href="books.jsp">Книги</a></li>
-                                            <li><a href="add.html">+добави</a><li>
+											<li><a href="add.html">+добави</a><li>
 										</ul>
 									</nav>
 							</div>
@@ -62,26 +63,53 @@
 				<div class="wrapper style2">
 					<div class="inner">
 						<div class="container">
-					
-									<!-- Content -->
+							<div class="row">
+								<div class="4u">
+									<div id="sidebar">
+
+										<!-- Sidebar -->
 									
-									<article>	
-                                          <form action="search">
+											<section>
+												<header>
+													<h2><%=theBook.getHeadline() %></h2>
+												</header>
+                                                
+												<span class="image featured"><img src="images/pic09.jpg" alt="unrellevent" /></span>
+												
+											</section>
+								
+									</div>
+								</div>
+								<div class="8u important(collapse)">
+									<div id="content">
+
+										<!-- Content -->
+									
+											<article>
+                                               <form action="search">
                                               <input type="text" name="search" style="width: 50%" />
                                                       <select name="type" style="width: 15%" >
-			                                          <option value="headline">заглавие</option>
-			                                          <option value="author">автор</option>
+			                                          <option value="headline">headline</option>
+			                                          <option value="author">author</option>
 		                                                </select>
                                                <input type="submit" value="Търси" />
                                                 </form>
-                                        <br />
-							
-                                        <p>Тази книга не съществува</p>
-									
-                             	
-											
+                                                <br />
+												<br /><p>Headline: <%=theBook.getHeadline() %></p>
+                                                <br /><p>Author: <%=theBook.getAuthor() %></p>
+                                                <br /><p>Publisher: <%=theBook.getPublisher() %></p>
+												<br /><p>Year of publishing: <%=theBook.getYearOfPublishing() %></p>
+                                                <br /><p>ISBN: <%=theBook.getISBN() %></p>
+												
+												<form method="post" action="delete">
+                                                <input style="background-color: #e31818" type="submit" value="Изтрий книгата">
+                                                <input type="hidden" name="id" value="<%=theBook.getId()%>">
+                                                </form>
 
 											</article>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

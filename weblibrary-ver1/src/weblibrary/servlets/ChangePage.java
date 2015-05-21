@@ -1,8 +1,10 @@
 package weblibrary.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.UnavailableException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +17,17 @@ import weblibrary.dao.SearchResult;
 public class ChangePage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private BookDAO dao;
+
+	public void init() throws ServletException {
+		dao = (BookDAO) getServletContext().getAttribute("dao");
+		if (dao == null)
+			throw new UnavailableException("Couldn’t get database.");
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		SearchResult result = null;
-		BookDAO dao = (BookDAO) getServletContext().getAttribute("dao");
 		Integer sPage = null;
 		String searchField = request.getParameter("search");
 		String type = request.getParameter("type");
@@ -27,6 +36,10 @@ public class ChangePage extends HttpServlet {
 			sPage = Integer.parseInt(pageParameter);
 		} catch (Exception e) {
 			System.out.println("Bad input");
+		}
+
+		if (searchField == null) {
+			searchField = "";
 		}
 		// if page is not set or input is bad it's set to 1
 		if (sPage == null) {
