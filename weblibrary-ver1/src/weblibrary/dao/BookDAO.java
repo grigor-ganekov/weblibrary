@@ -33,6 +33,12 @@ public class BookDAO {
 		return myConn;
 	}
 
+	/**
+	 * 
+	 * @param page
+	 *            the page wanted
+	 * @return search result containing the selected page data
+	 */
 	public SearchResult getAllBooks(int page) {
 		SearchResult result = new SearchResult();
 		result.setCurrentPage(page);
@@ -74,6 +80,14 @@ public class BookDAO {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param headline
+	 *            headline searching for
+	 * @param page
+	 *            page number
+	 * @return search result containing the selected page data
+	 */
 	public SearchResult searchBookByHeadline(String headline, int page) {
 		SearchResult result = new SearchResult();
 		result.setCurrentPage(page);
@@ -119,6 +133,14 @@ public class BookDAO {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param author
+	 *            author searching for
+	 * @param page
+	 *            page number
+	 * @return search result containing the selected page data
+	 */
 	public SearchResult searchBookByAuthor(String author, int page) {
 		SearchResult result = new SearchResult();
 		result.setCurrentPage(page);
@@ -164,6 +186,12 @@ public class BookDAO {
 		return result;
 	}
 
+	/**
+	 * converts a row to a book object
+	 * 
+	 * @param myRs
+	 * @return
+	 */
 	private Book convertRowToBook(ResultSet myRs) {
 		Book temp = null;
 		try {
@@ -183,6 +211,12 @@ public class BookDAO {
 		return temp;
 	}
 
+	/**
+	 * validates the string
+	 * 
+	 * @param theString
+	 *            the string to be validated
+	 */
 	private void validateString(String theString) {
 		if (theString == null || theString.isEmpty() || theString.trim().length() == 0) {
 			throw new IllegalArgumentException();
@@ -190,9 +224,16 @@ public class BookDAO {
 
 	}
 
+	/**
+	 * gets author id, if author is missing adds the author and returns the new
+	 * author id
+	 * 
+	 * @param name
+	 *            author's first and last name
+	 * @return author id
+	 * @throws SQLException
+	 */
 	public int addAuthorIfMissing(String name) throws SQLException {
-		// gets author id, if author is missing adds the author and returns the
-		// new author id
 		try {
 			validateString(name);
 		} catch (IllegalArgumentException iae) {
@@ -224,9 +265,16 @@ public class BookDAO {
 
 	}
 
+	/**
+	 * gets publisher id, if publisher is missing adds the publisher and returns
+	 * the new publisher id
+	 * 
+	 * @param name
+	 *            name of the publisher
+	 * @return
+	 * @throws SQLException
+	 */
 	public int addPublisherIfMissing(String name) throws SQLException {
-		// gets publisher id, if publisher is missing adds the publisher and
-		// returns the new publisher id
 		try {
 			validateString(name);
 		} catch (IllegalArgumentException iae) {
@@ -256,6 +304,12 @@ public class BookDAO {
 
 	}
 
+	/**
+	 * adds book to the database
+	 * 
+	 * @param theBook
+	 *            the book to be added
+	 */
 	public void addBook(Book theBook) {
 
 		try {
@@ -308,10 +362,16 @@ public class BookDAO {
 		}
 	}
 
+	/**
+	 * deletes a book from the database by its id
+	 * 
+	 * @param id
+	 *            of the book
+	 */
 	public void deleteBookById(int id) {
 		PreparedStatement myStmt = null;
 		try {
-			// first delete the links
+			// first delete the links between book-author and book-publisher
 			myStmt = myConn.prepareStatement("DELETE FROM book_author WHERE `book_id`= ?");
 			myStmt.setInt(1, id);
 			myStmt.executeUpdate();
@@ -335,11 +395,22 @@ public class BookDAO {
 		}
 	}
 
+	/**
+	 * deletes a book by book object
+	 * 
+	 * @param theBook
+	 *            the book to be deleted. It have to be added to the database
+	 */
 	public void deleteBook(Book theBook) {
-
 		deleteBookById(theBook.getId());
 	}
 
+	/**
+	 * 
+	 * @param id
+	 *            the id of the book in the database
+	 * @return returns a book object
+	 */
 	public Book getBookById(int id) {
 		Book theBook = null;
 		PreparedStatement myStmt = null;
