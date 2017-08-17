@@ -211,12 +211,6 @@ public class BookDAO {
 		return temp;
 	}
 
-	/**
-	 * validates the string
-	 * 
-	 * @param theString
-	 *            the string to be validated
-	 */
 	private void validateString(String theString) {
 		if (theString == null || theString.isEmpty() || theString.trim().length() == 0) {
 			throw new IllegalArgumentException();
