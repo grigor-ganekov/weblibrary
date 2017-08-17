@@ -11,4 +11,4 @@ You will need Apache Tomcat 8 server, MySQL RDBMS, JDBC connector.
 <br />PASSWORD replace with user password 
 <br />4.Connect your Tomcat 8 server to the web project
 
-this is only for my branch
+only for my master branch
