@@ -11,10 +11,5 @@ You will need Apache Tomcat 8 server, MySQL RDBMS, JDBC connector.
 <br />PASSWORD replace with user password 
 <br />4.Connect your Tomcat 8 server to the web project
 
-<<<<<<< HEAD
 adding some changes in testBranch
 adding some changes from the web
- 
-=======
-adding some changes from the web
->>>>>>> 7ed8802845ca1aac0a146d78b76194d094938b41
