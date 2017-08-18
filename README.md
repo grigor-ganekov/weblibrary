@@ -14,4 +14,4 @@ You will need Apache Tomcat 8 server, MySQL RDBMS, JDBC connector.
 clear
 change in first branch
 
-change in web
+change in web REMOVED
