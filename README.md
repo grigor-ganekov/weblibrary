@@ -10,6 +10,3 @@ You will need Apache Tomcat 8 server, MySQL RDBMS, JDBC connector.
 <br />USERNAME replace with MySQL user username that have all priveleges for the database
 <br />PASSWORD replace with user password 
 <br />4.Connect your Tomcat 8 server to the web project
-
-change made in test branch
-change made in web
